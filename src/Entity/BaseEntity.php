@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @author Thiago Paes <mrprompt@gmail.com>
+ * @ORM\HasLifecycleCallbacks
  * @ORM\MappedSuperclass(repositoryClass="Doctrine\ORM\EntityRepository")
  */
 trait BaseEntity
@@ -17,8 +18,8 @@ trait BaseEntity
      */
     public function onPrePersist()
     {
-        $this->created = new DateTime();
-        $this->updated = new DateTime();
+        $this->createdAt = new DateTime();
+        $this->updatedAt = new DateTime();
     }
 
     /**
@@ -26,6 +27,6 @@ trait BaseEntity
      */
     public function onPreUpdate()
     {
-        $this->updated = new DateTime();
+        $this->updatedAt = new DateTime();
     }
 }

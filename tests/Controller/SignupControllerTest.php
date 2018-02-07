@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller;
 
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SignupControllerTest extends WebTestCase
@@ -13,7 +14,6 @@ class SignupControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/signup');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Welcome to the Signup:index page', $crawler->filter('.container h1')->text());
     }
 
     public function validArgumentsProvider()
@@ -25,7 +25,13 @@ class SignupControllerTest extends WebTestCase
                     'signup_form[email]' => uniqid() . '@foo.bar.bar',
                     'signup_form[password][first]' => '123456',
                     'signup_form[password][second]' => '123456',
-                    'signup_form[locale]' => 'pt_BR'
+                    'signup_form[document_cpf]' => '123456',
+                    'signup_form[document_rg]' => '123456',
+                    'signup_form[phone_number]' => '123456',
+                    'signup_form[birthday][day]' => '1',
+                    'signup_form[birthday][month]' => '1',
+                    'signup_form[birthday][year]' => date('Y'),
+                    'signup_form[save]' => true,
                 ]
             ]
         ];
@@ -46,7 +52,7 @@ class SignupControllerTest extends WebTestCase
         $client->submit($form, $data);
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        // $this->assertContains('Registered', $crawler->filter('.alert p')->text());
+        //$this->assertContains('Registered', $crawler->filter('.alert p')->text());
     }
 
     public function invalidArgumentsProvider()

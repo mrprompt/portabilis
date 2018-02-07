@@ -1,10 +1,10 @@
 <?php
 namespace App\Tests\Service;
 
-use App\Service\Password;
+use App\Service\PasswordService;
 use PHPUnit\Framework\TestCase;
 
-class PasswordTest extends TestCase
+class PasswordServiceTest extends TestCase
 {
     /**
      * @const int
@@ -20,7 +20,7 @@ class PasswordTest extends TestCase
     {
         parent::setUp();
 
-        $this->service = new Password();
+        $this->service = new PasswordService();
     }
 
     /**

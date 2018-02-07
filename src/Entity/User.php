@@ -31,7 +31,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Name should not be blank")
      */
     private $name;
 
@@ -39,7 +39,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
-     * @Assert\NotBlank()
+     * @Assert\Email(message="Email is invalid")
      */
     private $email;
 
@@ -47,7 +47,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Password should not be blank")
      */
     private $password;
 
@@ -55,6 +55,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="document_rg", type="string", length=11, unique=true)
+     * @Assert\NotBlank(message="RG should not be blank")
      */
     private $document_rg;
 
@@ -62,6 +63,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="document_cpf", type="string", length=11, unique=true)
+     * @Assert\NotBlank(message="CPF should not be blank")
      */
     private $document_cpf;
 
@@ -69,6 +71,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="phone_number", type="string", length=20)
+     * @Assert\NotBlank(message="Phone number should not be blank")
      */
     private $phone_number;
 
@@ -76,7 +79,7 @@ class User
      * @var \DateTime
      *
      * @ORM\Column(name="birthday", type="datetime")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Birthday is invalid")
      * @Assert\Type("\DateTime")
      */
     private $birthday;
@@ -85,7 +88,6 @@ class User
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
-     * @Assert\NotBlank()
      * @Assert\Type("\DateTime")
      */
     private $createdAt;
@@ -94,7 +96,6 @@ class User
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
-     * @Assert\NotBlank()
      * @Assert\Type("\DateTime")
      */
     private $updatedAt;
@@ -258,7 +259,7 @@ class User
      *
      * @return \DateTime
      */
-    public function getBirthday(): DateTime
+    public function getBirthday()
     {
         return $this->birthday;
     }
@@ -280,7 +281,7 @@ class User
      *
      * @return \DateTime
      */
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }

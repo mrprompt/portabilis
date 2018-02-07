@@ -1,7 +1,7 @@
 <?php
 namespace App\Service;
 
-class Password
+class PasswordService
 {
     /**
      * @var array

@@ -6,7 +6,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\LoginForm;
 use App\Form\SignupForm;
-use App\Service\Password;
+use App\Service\PasswordService;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -23,8 +24,16 @@ class SignupController extends Controller
      */
     public function indexAction()
     {
-        $signupForm = $this->createForm(SignupForm::class, new User(), ['action' => $this->generateUrl('signup_post')]);
-        $loginForm = $this->createForm(LoginForm::class, new User(), ['action' => $this->generateUrl('login_post')]);
+        $signupForm = $this->createForm(
+            SignupForm::class, 
+            new User(), ['action' => $this->generateUrl('signup_post')]
+        );
+        
+        $loginForm = $this->createForm(
+            LoginForm::class, 
+            new User(), 
+            ['action' => $this->generateUrl('login_post')]
+        );
 
         return [
             'signupForm' => $signupForm->createView(),
@@ -37,13 +46,14 @@ class SignupController extends Controller
      * @Method("POST")
      * @Template("signup/index.html.twig")
      */
-    public function addAction(Request $request, Password $passwdService)
+    public function addAction(Request $request, PasswordService $passwdService, UserService $userService)
     {
         $form = $this->createForm(
             SignupForm::class, 
             new User(), 
             ['action' => $this->generateUrl('signup_post')]
         );
+        
         $form->handleRequest($request);
         
         $data = $form->getData();
@@ -51,7 +61,13 @@ class SignupController extends Controller
         if ($form->isValid()) {
             $data->setPassword($passwdService->generate($data->getPassword(), 12));
 
-            $this->addFlash('info', 'Registered');
+            try {
+                $userService->create($data);
+
+                $this->addFlash('info', 'Registered');
+            } catch (\Exception $ex) {
+                $this->addFlash('danger', 'Error when register user');
+            }
         } else {
             $errors = $form->getErrors(true, true);
 
