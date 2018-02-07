@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,8 +17,6 @@ class DefaultController extends Controller
     */
     public function index()
     {
-        $number = mt_rand(0, 100);
-
-        return $this->render('home/index.html.twig', ['number' => $number]);
+        return $this->render('home/index.html.twig');
     }
 }

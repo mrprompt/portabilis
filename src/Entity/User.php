@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Entity;
 
@@ -53,9 +54,32 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="locale", type="string", length=5)
+     * @ORM\Column(name="document_rg", type="string", length=11, unique=true)
      */
-    private $locale;
+    private $document_rg;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="document_cpf", type="string", length=11, unique=true)
+     */
+    private $document_cpf;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone_number", type="string", length=20)
+     */
+    private $phone_number;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="birthday", type="datetime")
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
+     */
+    private $birthday;
 
     /**
      * @var \DateTime
@@ -74,16 +98,6 @@ class User
      * @Assert\Type("\DateTime")
      */
     private $updatedAt;
-
-    /**
-     * User constructor.
-     */
-    public function __construct()
-    {
-        $this->locale = 'pt_BR';
-        $this->createdAt = new DateTime();
-        $this->updatedAt = new DateTime();
-    }
 
     /**
      * Get id
@@ -162,13 +176,101 @@ class User
     }
 
     /**
+     * Set document_rg
+     *
+     * @param string $document_rg
+     *
+     * @return User
+     */
+    public function setDocumentRG($document_rg)
+    {
+        $this->document_rg = $document_rg;
+    }
+
+    /**
+     * Get document_rg
+     *
+     * @return string
+     */
+    public function getDocumentRG()
+    {
+        return $this->document_rg;
+    }
+
+    /**
+     * Set document_cpf
+     *
+     * @param string $document_cpf
+     *
+     * @return User
+     */
+    public function setDocumentCPF($document_cpf)
+    {
+        $this->document_cpf = $document_cpf;
+    }
+
+    /**
+     * Get document_cpf
+     *
+     * @return string
+     */
+    public function getDocumentCPF()
+    {
+        return $this->document_cpf;
+    }
+
+    /**
+     * Set phone_number
+     *
+     * @param string $phone_number
+     *
+     * @return User
+     */
+    public function setPhoneNumber($phone_number)
+    {
+        $this->phone_number = $phone_number;
+    }
+
+    /**
+     * Get phone_number
+     *
+     * @return string
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phone_number;
+    }
+
+    /**
+     * Set birthday
+     *
+     * @param \DateTime $birthday
+     *
+     * @return User
+     */
+    public function setBirthday(DateTime $birthday)
+    {
+        $this->birthday = $birthday;
+    }
+
+    /**
+     * Get birthday
+     *
+     * @return \DateTime
+     */
+    public function getBirthday(): DateTime
+    {
+        return $this->birthday;
+    }
+
+    /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
      *
      * @return User
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }
@@ -178,7 +280,7 @@ class User
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -190,7 +292,7 @@ class User
      *
      * @return User
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
     }
@@ -200,28 +302,8 @@ class User
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * Get locale
-     *
-     * @return string
-     */
-    public function getLocale(): string
-    {
-        return $this->locale;
-    }
-
-    /**
-     * Set locale
-     *
-     * @param string $locale
-     */
-    public function setLocale(string $locale)
-    {
-        $this->locale = $locale;
     }
 }
