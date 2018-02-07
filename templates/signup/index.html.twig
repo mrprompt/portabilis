@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}AppBundle:About:index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1>Welcome to the Signup:index page</h1>
+
+            <div class="col-md-6">
+                <h2>Quero me cadastrar</h2>
+
+                {{ form(signupForm) }}
+            </div>
+
+            <div class="col-md-6">
+                <h2>Já possuo cadastro</h2>
+
+                {{ form(loginForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
