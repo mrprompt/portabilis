@@ -23,8 +23,7 @@ class SignupControllerTest extends WebTestCase
                 [
                     'signup_form[name]' => 'Foo',
                     'signup_form[email]' => uniqid() . '@foo.bar.bar',
-                    'signup_form[password][first]' => '123456',
-                    'signup_form[password][second]' => '123456',
+                    'signup_form[password]' => '123456',
                     'signup_form[document_cpf]' => '123456',
                     'signup_form[document_rg]' => '123456',
                     'signup_form[phone_number]' => '123456',

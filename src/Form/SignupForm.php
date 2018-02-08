@@ -17,64 +17,43 @@ final class SignupForm extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control'
-                ],
+                'attr' => ['class' => 'form-control'],
                 'required' => true,
             ])
             ->add('email', EmailType::class, [
                 'required' => true,
-                'attr' => [
-                    'class' => 'form-control'
-                ],
+                'attr' => ['class' => 'form-control'],
             ])
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
+            ->add('password', PasswordType::class, [
                 'required' => true,
-                'options' => [
-                    'attr' => ['class' => 'password-field form-control']
-                ],
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'attr' => ['class' => 'password-field form-control'],
+                'label' => 'Password',
             ])
             ->add('document_cpf', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control cpf',
-                ],
+                'attr' => ['class' => 'form-control cpf'],
                 'required' => true,
                 'label' => 'CPF',
             ])
             ->add('document_rg', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control rg'
-                ],
+                'attr' => ['class' => 'form-control rg'],
                 'required' => true,
                 'label' => 'RG'
             ])
             ->add('phone_number', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control sp_celphones'
-                ],
+                'attr' => ['class' => 'form-control sp_celphones'],
                 'required' => true,
                 'label' => 'Phone number'
             ])
             ->add('birthday', BirthdayType::class, [
-                'attr' => [
-                    'class' => 'form-control'
-                ],
+                'attr' => ['class' => 'form-control'],
                 'required' => true,
                 'label' => 'Birthday',
                 'format' => 'dd/MM/yyyy',
             ])
-            ->add(
-                'save',
-                SubmitType::class, [
-                    'label' => 'Save',
-                    'attr' => [
-                        'class' => 'btn btn-primary'
-                    ],
-                ]
-            )
+            ->add('save', SubmitType::class, [
+                'label' => 'Save',
+                'attr' => ['class' => 'btn btn-primary'],
+            ])
         ;
     }
 }

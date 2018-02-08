@@ -6,7 +6,6 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\LoginForm;
 use App\Form\SignupForm;
-use App\Service\PasswordService;
 use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,12 +46,8 @@ class SignupController extends Controller
      * @Method("POST")
      * @Template("signup/index.html.twig")
      */
-    public function addAction(
-        Request $request, 
-        SessionInterface $session, 
-        PasswordService $passwdService, 
-        UserService $userService
-    ) {
+    public function addAction(Request $request, SessionInterface $session, UserService $userService)
+    {
         $form = $this->createForm(
             SignupForm::class, 
             new User(), 
@@ -66,14 +61,14 @@ class SignupController extends Controller
         $session->set('signup_data', $data);
         
         if ($form->isValid()) {
-            $data->setPassword($passwdService->generate($data->getPassword(), 12));
-
             try {
                 $userService->create($data);
 
                 $this->addFlash('info', 'Registered');
                 
                 $session->remove('signup_data');
+            } catch (\InvalidArgumentException $ex) {
+                $this->addFlash('danger', 'Error, this CPF is not valid :(');
             } catch (\Exception $ex) {
                 $this->addFlash('danger', 'Error when register user, e-mail, cpf or rg already exists');
             }
@@ -82,7 +77,6 @@ class SignupController extends Controller
 
             foreach( $errors as $error ) {
                 $this->addFlash('danger', $error->getMessage());
-                var_dump($error->getMessage());
             }
         }
 
