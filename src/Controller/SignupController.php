@@ -23,6 +23,10 @@ class SignupController extends Controller
      */
     public function indexAction(SessionInterface $session)
     {
+        if ($session->get('user') !== null) {
+            return $this->redirect($this->generateUrl('homepage')); 
+        }
+        
         $signupForm = $this->createForm(
             SignupForm::class, 
             $session->get('signup_data', new User()), 
@@ -70,13 +74,9 @@ class SignupController extends Controller
             } catch (\InvalidArgumentException $ex) {
                 $this->addFlash('danger', 'Error, this CPF is not valid :(');
             } catch (\Exception $ex) {
-                $this->addFlash('danger', 'Error when register user, e-mail, cpf or rg already exists');
-            }
-        } else {
-            $errors = $form->getErrors(true, true);
-
-            foreach( $errors as $error ) {
-                $this->addFlash('danger', $error->getMessage());
+                foreach( $errors as $error ) {
+                    $this->addFlash('danger', $error->getMessage());
+                }
             }
         }
 

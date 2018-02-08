@@ -5,11 +5,13 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\LoginForm;
-use App\Form\SignupForm;
+use App\Service\AuthorizationService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class LoginController extends Controller
 {
@@ -18,10 +20,36 @@ class LoginController extends Controller
      * @Method("POST")
      * @Template("signup/index.html.twig", vars={"post"})
      */
-    public function loginAction()
+    public function loginAction(Request $request, SessionInterface $session, AuthorizationService $auth)
     {
-        $this->addFlash('info', 'Logged');
+        $form = $this->createForm(
+            LoginForm::class, 
+            new User(), 
+            ['action' => $this->generateUrl('login_post')]
+        );
+        
+        $form->handleRequest($request);
+        
+        $data = $form->getData();
 
-        return $this->redirect($this->generateUrl('signup'));
+        if ($form->isSubmitted()) {
+            try {
+                $authorized = $auth->authorize($data);
+                
+                $session->set('user', $authorized);
+                
+                $this->addFlash('info', 'User logged');
+            } catch (\InvalidArgumentException $ex) {
+                $this->addFlash('danger', 'Not authorized');
+            }
+        } else {
+            $errors = $form->getErrors(true, true);
+
+            foreach( $errors as $error ) {
+                $this->addFlash('danger', $error->getMessage());
+            }
+        }
+
+        return $this->redirect($this->generateUrl('homepage'));
     }
 }

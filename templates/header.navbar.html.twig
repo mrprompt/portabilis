@@ -7,15 +7,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ path('homepage') }}"><span class="brand">portabilis</span></a>
+            <a class="navbar-brand" href="{{ path('homepage') }}"><span class="brand">Portabilis</span></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li {{ app.request.get('_route') == 'homepage' ? 'class="active"' : '' }}><a href="{{ path('homepage') }}">Início</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                {#<li><a href="{{ path("signup") }}">Entrar</a></li>#}
+                {% if app.session.get('user') == false %}
                 <li {{ app.request.get('_route') == 'signup' ? 'class="active"' : '' }}><a href="{{ path('signup') }}">Cadastre-se</a></li>
+                {% else %}
+                <li {{ app.request.get('_route') == 'logout' ? 'class="active"' : '' }}><a href="{{ path('signout') }}">Sair</a></li>
+                {% endif %}
             </ul>
         </div><!--/.navbar-collapse -->
     </div>
