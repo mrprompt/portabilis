@@ -32,6 +32,10 @@ class AuthorizationService
     {
         $search = $this->repository->findOneByEmail($user->getEmail());
 
+        if (!$search) {
+            throw new \InvalidArgumentException('User not authorized');
+        }
+
         if ($this->password->verify($user->getPassword(), $search->getPassword())) {
             return $search;
         }
