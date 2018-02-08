@@ -39,21 +39,21 @@ final class SignupForm extends AbstractType
             ])
             ->add('document_cpf', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control cpf',
                 ],
                 'required' => true,
                 'label' => 'CPF',
             ])
             ->add('document_rg', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control rg'
                 ],
                 'required' => true,
                 'label' => 'RG'
             ])
             ->add('phone_number', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control sp_celphones'
                 ],
                 'required' => true,
                 'label' => 'Phone number'

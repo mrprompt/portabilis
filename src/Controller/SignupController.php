@@ -10,7 +10,7 @@ use App\Service\PasswordService;
 use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -22,11 +22,12 @@ class SignupController extends Controller
      * @Method("GET")
      * @Template("signup/index.html.twig")
      */
-    public function indexAction()
+    public function indexAction(SessionInterface $session)
     {
         $signupForm = $this->createForm(
             SignupForm::class, 
-            new User(), ['action' => $this->generateUrl('signup_post')]
+            $session->get('signup_data', new User()), 
+            ['action' => $this->generateUrl('signup_post')]
         );
         
         $loginForm = $this->createForm(
@@ -46,8 +47,12 @@ class SignupController extends Controller
      * @Method("POST")
      * @Template("signup/index.html.twig")
      */
-    public function addAction(Request $request, PasswordService $passwdService, UserService $userService)
-    {
+    public function addAction(
+        Request $request, 
+        SessionInterface $session, 
+        PasswordService $passwdService, 
+        UserService $userService
+    ) {
         $form = $this->createForm(
             SignupForm::class, 
             new User(), 
@@ -58,6 +63,8 @@ class SignupController extends Controller
         
         $data = $form->getData();
 
+        $session->set('signup_data', $data);
+        
         if ($form->isValid()) {
             $data->setPassword($passwdService->generate($data->getPassword(), 12));
 
@@ -65,14 +72,17 @@ class SignupController extends Controller
                 $userService->create($data);
 
                 $this->addFlash('info', 'Registered');
+                
+                $session->remove('signup_data');
             } catch (\Exception $ex) {
-                $this->addFlash('danger', 'Error when register user');
+                $this->addFlash('danger', 'Error when register user, e-mail, cpf or rg already exists');
             }
         } else {
             $errors = $form->getErrors(true, true);
 
             foreach( $errors as $error ) {
                 $this->addFlash('danger', $error->getMessage());
+                var_dump($error->getMessage());
             }
         }
 

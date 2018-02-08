@@ -6,6 +6,7 @@ namespace App\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * User
@@ -13,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="users", uniqueConstraints={@ORM\UniqueConstraint(name="email_idx", columns={"email"})})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(fields={"email", "document_cpf", "document_rg"}, message="This email, cpf or rg is already registered")
  */
 class User
 {

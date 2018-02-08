@@ -13,4 +13,4 @@ RG: RG
 CPF: CPF
 Phone number: Número de telefone
 Birthday: Nascimento
-Error when register user: Erro ao registrar usuário
+Error when register user, e-mail, cpf or rg already exists: Erro ao registrar usuário, e-mail, cpf ou rg já existem
