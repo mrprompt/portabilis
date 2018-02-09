@@ -21,6 +21,12 @@ class UserService
      */
     private $password;
 
+    /**
+     * Constructor
+     * 
+     * @param UserRepository $repository
+     * @param PasswordService $password
+     */
     public function __construct(UserRepository $repository, PasswordService $password)
     {
         $this->repository = $repository;
@@ -29,14 +35,13 @@ class UserService
 
     /**
      * Create user
+     * 
+     * @return UserEntity
      */
-    public function create(UserEntity $user)
+    public function create(UserEntity $user): UserEntity
     {
         $user->setPassword($this->password->generate($user->getPassword(), 12));
-        $user->setDocumentCPF(preg_replace('/[^[:digit:]]/', '', $user->getDocumentCPF()));
-        $user->setDocumentRG(preg_replace('/[^[:digit:]]/', '', $user->getDocumentRG()));
-        $user->setPhoneNumber(preg_replace('/[^[:digit:]]/', '', $user->getPhoneNumber()));
-            
+
         try {
             v::cpf()->validate($user->getDocumentCPF());
             

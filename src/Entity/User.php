@@ -103,6 +103,15 @@ class User
     private $updatedAt;
 
     /**
+     * constructor
+     */
+    public function __construct()
+    {
+        $this->createdAt = new DateTime;
+        $this->updatedAt = new DateTime;
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -116,8 +125,6 @@ class User
      * Set name
      *
      * @param string $name
-     *
-     * @return User
      */
     public function setName($name)
     {
@@ -138,8 +145,6 @@ class User
      * Set email
      *
      * @param string $email
-     *
-     * @return User
      */
     public function setEmail($email)
     {
@@ -160,8 +165,6 @@ class User
      * Set password
      *
      * @param string $password
-     *
-     * @return User
      */
     public function setPassword($password)
     {
@@ -182,12 +185,10 @@ class User
      * Set document_rg
      *
      * @param string $document_rg
-     *
-     * @return User
      */
     public function setDocumentRG($document_rg)
     {
-        $this->document_rg = $document_rg;
+        $this->document_rg = preg_replace('/[^[:digit:]]/', '', $document_rg);
     }
 
     /**
@@ -204,12 +205,10 @@ class User
      * Set document_cpf
      *
      * @param string $document_cpf
-     *
-     * @return User
      */
     public function setDocumentCPF($document_cpf)
     {
-        $this->document_cpf = $document_cpf;
+        $this->document_cpf = preg_replace('/[^[:digit:]]/', '', $document_cpf);
     }
 
     /**
@@ -226,12 +225,10 @@ class User
      * Set phone_number
      *
      * @param string $phone_number
-     *
-     * @return User
      */
     public function setPhoneNumber($phone_number)
     {
-        $this->phone_number = $phone_number;
+        $this->phone_number = preg_replace('/[^[:digit:]]/', '', $phone_number);
     }
 
     /**
@@ -248,8 +245,6 @@ class User
      * Set birthday
      *
      * @param \DateTime $birthday
-     *
-     * @return User
      */
     public function setBirthday(DateTime $birthday)
     {
@@ -264,49 +259,5 @@ class User
     public function getBirthday()
     {
         return $this->birthday;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return User
-     */
-    public function setCreatedAt(DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return User
-     */
-    public function setUpdatedAt(DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt(): DateTime
-    {
-        return $this->updatedAt;
     }
 }

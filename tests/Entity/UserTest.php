@@ -18,6 +18,28 @@ class UserTest extends TestCase
 {
     use ChangeProtectedAttribute;
 
+    private $user;
+
+    /**
+     * Setup
+     */
+    public function setUp()
+    {
+        parent::setUp();
+        
+        $this->user = new User;
+    }
+
+    /**
+     * Shutdown
+     */
+    public function tearDown()
+    {
+        $this->user = null;
+        
+        parent::tearDown();
+    }
+
     /**
      * @return multitype:multitype:number
      */
@@ -49,11 +71,9 @@ class UserTest extends TestCase
      */
     public function getIdReturnValue($obj)
     {
-        $user = new User();
+        $this->modifyAttribute($this->user, 'id', $obj->id);
 
-        $this->modifyAttribute($user, 'id', $obj->id);
-
-        $this->assertEquals($user->getId(), $obj->id);
+        $this->assertEquals($this->user->getId(), $obj->id);
     }
 
     /**
@@ -63,9 +83,7 @@ class UserTest extends TestCase
      */
     public function setNameReturnEmpty($obj)
     {
-        $user = new User();
-
-        $result = $user->setName($obj->name);
+        $result = $this->user->setName($obj->name);
 
         $this->assertEmpty($result);
     }
@@ -77,11 +95,9 @@ class UserTest extends TestCase
      */
     public function getNameReturnValue($obj)
     {
-        $user = new User();
+        $this->modifyAttribute($this->user, 'name', $obj->name);
 
-        $this->modifyAttribute($user, 'name', $obj->name);
-
-        $this->assertEquals($user->getName(), $obj->name);
+        $this->assertEquals($this->user->getName(), $obj->name);
     }
 
     /**
@@ -91,9 +107,7 @@ class UserTest extends TestCase
      */
     public function setEmailReturnEmpty($obj)
     {
-        $user = new User();
-
-        $result = $user->setEmail($obj->email);
+        $result = $this->user->setEmail($obj->email);
 
         $this->assertEmpty($result);
     }
@@ -105,11 +119,9 @@ class UserTest extends TestCase
      */
     public function getEmailReturnValue($obj)
     {
-        $user = new User();
+        $this->modifyAttribute($this->user, 'email', $obj->email);
 
-        $this->modifyAttribute($user, 'email', $obj->email);
-
-        $this->assertEquals($user->getEmail(), $obj->email);
+        $this->assertEquals($this->user->getEmail(), $obj->email);
     }
 
     /**
@@ -119,9 +131,7 @@ class UserTest extends TestCase
      */
     public function setPasswordReturnEmpty($obj)
     {
-        $user = new User();
-
-        $result = $user->setPassword($obj->password);
+        $result = $this->user->setPassword($obj->password);
 
         $this->assertEmpty($result);
     }
@@ -133,11 +143,9 @@ class UserTest extends TestCase
      */
     public function getPasswordReturnValue($obj)
     {
-        $user = new User();
+        $this->modifyAttribute($this->user, 'password', $obj->password);
 
-        $this->modifyAttribute($user, 'password', $obj->password);
-
-        $this->assertEquals($user->getPassword(), $obj->password);
+        $this->assertEquals($this->user->getPassword(), $obj->password);
     }
 
     /**
@@ -147,9 +155,7 @@ class UserTest extends TestCase
      */
     public function setDocumentRGReturnEmpty($obj)
     {
-        $user = new User();
-
-        $result = $user->setDocumentRG($obj->document_rg);
+        $result = $this->user->setDocumentRG($obj->document_rg);
 
         $this->assertEmpty($result);
     }
@@ -161,11 +167,9 @@ class UserTest extends TestCase
      */
     public function getDocumentRGReturnValue($obj)
     {
-        $user = new User();
+        $this->modifyAttribute($this->user, 'document_rg', $obj->document_rg);
 
-        $this->modifyAttribute($user, 'document_rg', $obj->document_rg);
-
-        $this->assertEquals($user->getDocumentRG(), $obj->document_rg);
+        $this->assertEquals($this->user->getDocumentRG(), $obj->document_rg);
     }
 
     /**
@@ -175,9 +179,7 @@ class UserTest extends TestCase
      */
     public function setDocumentCPFReturnEmpty($obj)
     {
-        $user = new User();
-
-        $result = $user->setDocumentCPF($obj->document_cpf);
+        $result = $this->user->setDocumentCPF($obj->document_cpf);
 
         $this->assertEmpty($result);
     }
@@ -189,11 +191,9 @@ class UserTest extends TestCase
      */
     public function getDocumentCPFReturnValue($obj)
     {
-        $user = new User();
+        $this->modifyAttribute($this->user, 'document_cpf', $obj->document_cpf);
 
-        $this->modifyAttribute($user, 'document_cpf', $obj->document_cpf);
-
-        $this->assertEquals($user->getDocumentCPF(), $obj->document_cpf);
+        $this->assertEquals($this->user->getDocumentCPF(), $obj->document_cpf);
     }
 
     /**
@@ -203,9 +203,7 @@ class UserTest extends TestCase
      */
     public function setPhoneNumberReturnEmpty($obj)
     {
-        $user = new User();
-
-        $result = $user->setPhoneNumber($obj->phone_number);
+        $result = $this->user->setPhoneNumber($obj->phone_number);
 
         $this->assertEmpty($result);
     }
@@ -217,11 +215,9 @@ class UserTest extends TestCase
      */
     public function getPhoneNumberReturnValue($obj)
     {
-        $user = new User();
+        $this->modifyAttribute($this->user, 'phone_number', $obj->phone_number);
 
-        $this->modifyAttribute($user, 'phone_number', $obj->phone_number);
-
-        $this->assertEquals($user->getPhoneNumber(), $obj->phone_number);
+        $this->assertEquals($this->user->getPhoneNumber(), $obj->phone_number);
     }
 
     /**
@@ -231,9 +227,7 @@ class UserTest extends TestCase
      */
     public function setBirthdayReturnEmpty($obj)
     {
-        $user = new User();
-
-        $result = $user->setBirthday($obj->birthday);
+        $result = $this->user->setBirthday($obj->birthday);
 
         $this->assertEmpty($result);
     }
@@ -245,11 +239,9 @@ class UserTest extends TestCase
      */
     public function getBirthdayReturnValue($obj)
     {
-        $user = new User();
+        $this->modifyAttribute($this->user, 'birthday', $obj->birthday);
 
-        $this->modifyAttribute($user, 'birthday', $obj->birthday);
-
-        $this->assertEquals($user->getBirthday(), $obj->birthday);
+        $this->assertEquals($this->user->getBirthday(), $obj->birthday);
     }
 
     /**
@@ -259,9 +251,7 @@ class UserTest extends TestCase
      */
     public function setCreatedAtReturnEmpty($obj)
     {
-        $user = new User();
-
-        $result = $user->setCreatedAt($obj->createdAt);
+        $result = $this->user->setCreatedAt($obj->createdAt);
 
         $this->assertEmpty($result);
     }
@@ -273,11 +263,9 @@ class UserTest extends TestCase
      */
     public function getCreatedAtReturnValue($obj)
     {
-        $user = new User();
+        $this->modifyAttribute($this->user, 'createdAt', $obj->createdAt);
 
-        $this->modifyAttribute($user, 'createdAt', $obj->createdAt);
-
-        $this->assertEquals($user->getCreatedAt(), $obj->createdAt);
+        $this->assertEquals($this->user->getCreatedAt(), $obj->createdAt);
     }
 
     /**
@@ -287,9 +275,7 @@ class UserTest extends TestCase
      */
     public function setUpdatedAtReturnEmpty($obj)
     {
-        $user = new User();
-
-        $result = $user->setUpdatedAt($obj->updatedAt);
+        $result = $this->user->setUpdatedAt($obj->updatedAt);
 
         $this->assertEmpty($result);
     }
@@ -301,10 +287,8 @@ class UserTest extends TestCase
      */
     public function getUpdatedAtReturnValue($obj)
     {
-        $user = new User();
+        $this->modifyAttribute($this->user, 'updatedAt', $obj->updatedAt);
 
-        $this->modifyAttribute($user, 'updatedAt', $obj->updatedAt);
-
-        $this->assertEquals($user->getUpdatedAt(), $obj->updatedAt);
+        $this->assertEquals($this->user->getUpdatedAt(), $obj->updatedAt);
     }
 }

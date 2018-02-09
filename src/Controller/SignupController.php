@@ -74,7 +74,11 @@ class SignupController extends Controller
             } catch (\InvalidArgumentException $ex) {
                 $this->addFlash('danger', 'Error, this CPF is not valid :(');
             } catch (\Exception $ex) {
-                foreach( $errors as $error ) {
+                $this->addFlash('danger', $ex->getMessage());
+            }
+        } else {
+            if (isset($errors)) {
+                foreach ($errors as $error) {
                     $this->addFlash('danger', $error->getMessage());
                 }
             }
