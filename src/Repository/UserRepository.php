@@ -8,11 +8,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 class UserRepository extends ServiceEntityRepository
 {
     /**
-     * Entity manager
-     */
-    private $em;
-    
-    /**
      * Constructor
      */
     public function __construct(RegistryInterface $registry)

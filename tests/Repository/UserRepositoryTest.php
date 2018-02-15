@@ -1,10 +1,8 @@
 <?php
 namespace App\Tests\Repository;
 
-use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use App\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @author Thiago Paes <mrprompt@gmail.com>
@@ -26,8 +24,6 @@ class UserRepositoryTest extends KernelTestCase
      */
     public function setUp()
     {
-        parent::setUp();
-
         $kernel = self::bootKernel();
 
         $this->em = $kernel->getContainer()->get('doctrine')->getManager();
