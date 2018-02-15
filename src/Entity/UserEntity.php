@@ -33,6 +33,13 @@ class UserEntity
     private $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="internal_id", type="integer", nullable=true)
+     */
+    private $internal_id;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -262,5 +269,25 @@ class UserEntity
     public function getBirthday()
     {
         return $this->birthday;
+    }
+
+    /**
+     * Get the value of internal_id
+     *
+     * @return  int
+     */ 
+    public function getInternalId(): int
+    {
+        return $this->internal_id;
+    }
+
+    /**
+     * Set the value of internal_id
+     *
+     * @param  int  $internal_id
+     */ 
+    public function setInternalId(int $internal_id)
+    {
+        $this->internal_id = $internal_id;
     }
 }

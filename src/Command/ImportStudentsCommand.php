@@ -1,8 +1,9 @@
 <?php
 namespace App\Command;
 
-use App\Service\CourseService;
-use App\Entity\CourseEntity;
+use DateTime;
+use App\Service\UserService;
+use App\Entity\UserEntity;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,17 +12,17 @@ use League\Csv\Reader;
 use League\Csv\Statement;
 
 /**
- * Import courses from csv
+ * Import students from csv
  * 
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class ImportCoursesCommand extends Command
+class ImportStudentsCommand extends Command
 {
-    private $courseService;
+    private $userService;
 
-    public function __construct(CourseService $courseService)
+    public function __construct(UserService $userService)
     {
-        $this->courseService = $courseService;
+        $this->userService = $userService;
 
         parent::__construct();
     }
@@ -29,10 +30,10 @@ class ImportCoursesCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('app:import:courses')
-            ->setDescription('Import courses from csv file.')
-            ->setHelp('Import courses from specified csv file.')
-            ->addArgument('file', InputArgument::REQUIRED, 'The csv file with courses.')
+            ->setName('app:import:students')
+            ->setDescription('Import students from csv file.')
+            ->setHelp('Import students from specified csv file.')
+            ->addArgument('file', InputArgument::REQUIRED, 'The csv file with students.')
             ->addArgument('offset', InputArgument::OPTIONAL, 'offset to start - default 0', 0)
             ->addArgument('limit', InputArgument::OPTIONAL, 'limit to import - default 1000', 1000)
         ;
@@ -42,8 +43,8 @@ class ImportCoursesCommand extends Command
     {
         // outputs multiple lines to the console (adding "\n" at the end of each line)
         $output->writeln([
-            'Courses Importer',
-            '================',
+            'Students Importer',
+            '=================',
             '',
         ]);
 
@@ -53,23 +54,26 @@ class ImportCoursesCommand extends Command
 
         $csv = Reader::createFromPath($file, 'r');
         $csv->setHeaderOffset(0); //set the CSV header offset
+        $csv->setDelimiter(';');
 
         $stmt = (new Statement())->offset($offset)->limit($limit);
 
         $records = $stmt->process($csv);
         
         foreach ($records as $record) {
-            $course = new CourseEntity;
-            $course->setName($record['course_name']);
-            $course->setInternalId($record['id']);
-            $course->setMonthlyPayment((float) $record['monthly_amount']);
-            $course->setRegistrationFee((float) $record['registration_tax']);
-            $course->setPeriod($record['period']);
-            $course->setDuration((int) $record['duration']);
+            $user = new UserEntity;
+            $user->setName($record['name']);
+            $user->setInternalId($record['id']);
+            $user->setEmail($record['cpf'] . '@portabilis.com.br');
+            $user->setPassword($record['cpf'] . $record['rg']);
+            $user->setDocumentCPF($record['cpf']);
+            $user->setDocumentRG($record['rg']);
+            $user->setPhoneNumber($record['phone']);
+            $user->setBirthDay(new DateTime($record['birthday']));
 
-            $this->courseService->create($course);
+            $this->userService->create($user);
             
-            $output->writeln($course->getName() . ' imported');
+            $output->writeln($user->getName() . ' imported');
         }
     }
 }
