@@ -41,13 +41,15 @@ class ProfileController extends Controller
      */
     public function addAction(Request $request, SessionInterface $session, UserService $userService)
     {
-        if ($session->get('user') === null) {
+        $user = $session->get('user');
+
+        if ($user === null) {
             return $this->redirect($this->generateUrl('homepage')); 
         }
 
         $form = $this->createForm(
             ProfileForm::class, 
-            $session->get('user'), 
+            $user, 
             ['action' => $this->generateUrl('profile_post')]
         );
         
@@ -55,20 +57,14 @@ class ProfileController extends Controller
         
         $data = $form->getData();
 
-        if ($form->isValid()) {
-            try {
-                // $userService->update($data);
+        try {
+            $result = $userService->update($user->getId(), $data);
 
-                $this->addFlash('info', 'Updated');
-            } catch (\Exception $ex) {
-                $this->addFlash('danger', $ex->getMessage());
-            }
-        } else {
-            $this->addFlash('danger', 'Error updating profile');
+            $this->addFlash('info', 'Updated');
 
-            foreach ($form->getErrors() as $error) {
-                $this->addFlash('danger', $error->getMessage());
-            }
+            $session->set('user', $result);
+        } catch (\Exception $ex) {
+            $this->addFlash('danger', $ex->getMessage());
         }
 
         return $this->redirect($this->generateUrl('profile'));

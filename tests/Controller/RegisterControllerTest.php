@@ -46,7 +46,7 @@ class RegisterControllerTest extends BaseController
         $client->submit($form, $data);
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        //$this->assertContains('Registered', $crawler->filter('.alert p')->text());
+        $this->assertEquals(0, $crawler->filter('.info')->count());
     }
 
     public function invalidArgumentsProvider()
@@ -75,5 +75,6 @@ class RegisterControllerTest extends BaseController
         $client->submit($form, $data);
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertEquals(0, $crawler->filter('.danger')->count());
     }
 }

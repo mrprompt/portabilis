@@ -2,6 +2,7 @@
 namespace App\Tests\Repository;
 
 use App\Entity\CourseEntity;
+use App\Common\ChangeProtectedAttribute;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
@@ -9,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 class CourseRepositoryTest extends KernelTestCase
 {
+    use ChangeProtectedAttribute;
+    
     /**
      * @var CourseEntity
      */
@@ -60,12 +63,40 @@ class CourseRepositoryTest extends KernelTestCase
      */
     public function findById()
     {
-        $this->markTestIncomplete();
-        
         $result = $this->obj->findById(1);
 
         $this->assertTrue(is_array($result));
-        $this->assertInstanceOf(CourseEntity::class, $result[0]);
+    }
+
+    public function validData()
+    {
+        $course1 = new CourseEntity;
+        
+        $this->modifyAttribute($course1, 'id', '1');
+        $this->modifyAttribute($course1, 'name', 'Course 1');
+        $this->modifyAttribute($course1, 'monthly_payment', 0);
+        $this->modifyAttribute($course1, 'registration_fee', 0);
+        $this->modifyAttribute($course1, 'period', 'matutino');
+        $this->modifyAttribute($course1, 'duration', 0);
+        
+        return [
+            [
+                $course1
+            ]
+            ];
+    }
+
+    /**
+     * @test
+     * @covers \App\Repository\CourseRepository::create
+     * @dataProvider validData
+     */
+    public function createWithValidData($data)
+    {
+        $result = $this->obj->create($data);
+
+        $this->assertTrue(is_object($result));
+        $this->assertInstanceOf(CourseEntity::class, $result);
     }
 
     /**
@@ -75,8 +106,6 @@ class CourseRepositoryTest extends KernelTestCase
      */
     public function createWithUnpopulatedEntityThrowsException()
     {
-        $this->markTestIncomplete();
-        
         $this->obj->create(new CourseEntity());
     }
 }

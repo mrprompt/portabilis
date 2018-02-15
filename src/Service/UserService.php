@@ -68,4 +68,24 @@ class UserService
             throw new InvalidArgumentException($ex->getMessage());
         }
     }
+
+    /**
+     * Update user
+     * 
+     * @param int $id
+     * @param UserEntity $user
+     * 
+     * @return UserEntity 
+     * 
+     * @throws InvalidArgumentException
+     * @throws Exception
+     */
+    public function update(int $id, UserEntity $user): UserEntity
+    {
+        try {
+            return $this->repository->update($id, $user);
+        } catch (Exception $ex) {
+            throw new InvalidArgumentException($ex->getMessage());
+        }
+    }
 }

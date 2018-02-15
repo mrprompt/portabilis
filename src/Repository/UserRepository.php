@@ -32,4 +32,24 @@ class UserRepository extends ServiceEntityRepository
             throw new \InvalidArgumentException("An user with this email or documents is already registered");
         }
     }
+    
+    /**
+     * update user
+     */
+    public function update(int $id, UserEntity $user)
+    {
+        $search = $this->em->getRepository(UserEntity::class)->find($id);
+
+        if (!$search) {
+            throw $this->createNotFoundException('No user found for id ' . $id);
+        }
+
+        $search->setName($user->getName());
+        $search->setEmail($user->getEmail());
+        $search->setPhoneNumber($user->getPhoneNumber());
+
+        $this->em->flush();
+
+        return $search;
+    }
 }

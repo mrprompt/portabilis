@@ -4,9 +4,12 @@ namespace App\Tests\Controller;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Entity\UserEntity;
+use App\Common\ChangeProtectedAttribute;
 
 class BaseController extends WebTestCase
 {
+    use ChangeProtectedAttribute;
+
     /**
      * Client
      */
@@ -20,6 +23,8 @@ class BaseController extends WebTestCase
         $session = $this->client->getContainer()->get('session');
 
         $user = new UserEntity();
+
+        $this->modifyAttribute($user, 'id', 1);
         
         $session->set('user', $user);
         $session->save();

@@ -91,12 +91,6 @@ class CourseEntity
      */
     public function __construct()
     {
-        $this->id = 0;
-        $this->name = '';
-        $this->monthly_payment = 0.00;
-        $this->registration_fee = 0.00;
-        $this->period = 'matutino';
-        $this->duration = 0;
         $this->createdAt = new DateTime;
         $this->updatedAt = new DateTime;
     }
