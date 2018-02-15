@@ -56,8 +56,14 @@
     "doctrine/orm": {
         "version": "v2.6.0"
     },
+    "hamcrest/hamcrest-php": {
+        "version": "v2.0.0"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "mockery/mockery": {
+        "version": "1.0"
     },
     "ocramius/package-versions": {
         "version": "1.3.0"

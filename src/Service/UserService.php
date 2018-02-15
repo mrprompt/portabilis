@@ -45,7 +45,8 @@ class UserService
     /**
      * Create user
      * 
-     * @return UserEntity
+     * @param UserEntity $user
+     * @return UserEntity 
      */
     public function create(UserEntity $user): UserEntity
     {
