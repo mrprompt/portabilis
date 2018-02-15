@@ -1,7 +1,7 @@
 <?php
 namespace App\Tests\Mock\Entity;
 
-use App\Entity\UserInterface;
+use App\Entity\User as UserEntity;
 use Mockery as m;
 
 /**
@@ -16,7 +16,7 @@ abstract class User
      */
     public static function getMock()
     {
-        $user = m::mock(UserInterface::class);
+        $user = m::mock(UserEntity::class);
         $user->shouldReceive('getId')->andReturn(1)->byDefault();
         $user->shouldReceive('setName')->andReturnNull()->byDefault();
         $user->shouldReceive('getName')->andReturn('Lorem ipsum')->byDefault();
