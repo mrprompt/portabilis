@@ -4,20 +4,25 @@ declare(strict_types = 1);
 namespace App\Tests\Entity;
 
 use App\Common\ChangeProtectedAttribute;
-use App\Entity\Course;
+use App\Entity\CourseEntity;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use DateTime;
 
 /**
- * Course test case.
+ * Course Entity test case.
  *
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class CourseTest extends TestCase
+class CourseEntityTest extends TestCase
 {
     use ChangeProtectedAttribute;
 
+    /**
+     * The course entity
+     * 
+     * @var CourseEntity
+     */
     private $course;
 
     /**
@@ -27,7 +32,7 @@ class CourseTest extends TestCase
     {
         parent::setUp();
         
-        $this->course = new Course;
+        $this->course = new CourseEntity;
     }
 
     /**
@@ -109,8 +114,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::getId
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::getId
      */
     public function getIdReturnValue($obj)
     {
@@ -122,8 +127,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::setName
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::setName
      */
     public function setNameReturnEmpty($obj)
     {
@@ -135,8 +140,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider invalidObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::setName
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::setName
      * @expectedException \TypeError
      */
     public function setNameWithoutStringThrowsException($obj)
@@ -147,8 +152,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::getName
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::getName
      */
     public function getNameReturnValue($obj)
     {
@@ -160,8 +165,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::setMonthlyPayment
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::setMonthlyPayment
      */
     public function setMonthlyPaymentReturnEmpty($obj)
     {
@@ -173,8 +178,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider invalidObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::setMonthlyPayment
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::setMonthlyPayment
      * @expectedException \TypeError
      */
     public function setMonthlyPaymentThrowsExceptionWithInvalidValue($obj)
@@ -185,8 +190,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::getMonthlyPayment
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::getMonthlyPayment
      */
     public function getMonthlyPaymentReturnValue($obj)
     {
@@ -198,8 +203,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::setRegistrationFee
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::setRegistrationFee
      */
     public function setRegistrationFeeReturnEmpty($obj)
     {
@@ -211,8 +216,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider invalidObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::setRegistrationFee
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::setRegistrationFee
      * @expectedException \TypeError
      */
     public function setRegistrationFeeThrowsExceptionWithInvalidValue($obj)
@@ -223,8 +228,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::getRegistrationFee
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::getRegistrationFee
      */
     public function getRegistrationFeeReturnValue($obj)
     {
@@ -236,8 +241,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::setPeriod
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::setPeriod
      */
     public function setPeriodReturnEmpty($obj)
     {
@@ -249,8 +254,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider invalidObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::setPeriod
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::setPeriod
      * @expectedException \TypeError
      */
     public function setPeriodWithoutStringThrowsException($obj)
@@ -261,8 +266,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::getPeriod
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::getPeriod
      */
     public function getPeriodReturnValue($obj)
     {
@@ -274,8 +279,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::setDuration
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::setDuration
      */
     public function setDurationReturnEmpty($obj)
     {
@@ -287,8 +292,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider invalidObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::setDuration
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::setDuration
      * @expectedException \TypeError
      */
     public function setDurationThrowsExceptionWithInvalidValue($obj)
@@ -299,8 +304,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::getDuration
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::getDuration
      */
     public function getDurationReturnValue($obj)
     {
@@ -312,8 +317,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::setCreatedAt
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::setCreatedAt
      */
     public function setCreatedAtReturnEmpty($obj)
     {
@@ -325,8 +330,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::getCreatedAt
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::getCreatedAt
      */
     public function getCreatedAtReturnValue($obj)
     {
@@ -338,8 +343,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::setUpdatedAt
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::setUpdatedAt
      */
     public function setUpdatedAtReturnEmpty($obj)
     {
@@ -351,8 +356,8 @@ class CourseTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\Course::__construct
-     * @covers       \App\Entity\Course::getUpdatedAt
+     * @covers       \App\Entity\CourseEntity::__construct
+     * @covers       \App\Entity\CourseEntity::getUpdatedAt
      */
     public function getUpdatedAtReturnValue($obj)
     {

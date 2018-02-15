@@ -16,10 +16,10 @@ abstract class PasswordService
      */
     public static function getMock()
     {
-        $user = m::mock(Service::class);
-        $user->shouldReceive('generate')->andReturn(rand(0, 100))->byDefault();
-        $user->shouldReceive('verify')->andReturn(true)->byDefault();
+        $mock = m::mock(Service::class);
+        $mock->shouldReceive('generate')->andReturn(rand(0, 100))->byDefault();
+        $mock->shouldReceive('verify')->andReturn(true)->byDefault();
 
-        return $user;
+        return $mock;
     }
 }

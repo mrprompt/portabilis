@@ -1,9 +1,11 @@
 <?php
+declare(strict_types = 1);
+
 namespace App\Service;
 
 use InvalidArgumentException;
 use Exception;
-use App\Entity\User as UserEntity;
+use App\Entity\UserEntity;
 use App\Repository\UserRepository;
 use App\Service\PasswordService;
 use Respect\Validation\Validator as v;
@@ -46,7 +48,11 @@ class UserService
      * Create user
      * 
      * @param UserEntity $user
+     * 
      * @return UserEntity 
+     * 
+     * @throws InvalidArgumentException
+     * @throws Exception
      */
     public function create(UserEntity $user): UserEntity
     {

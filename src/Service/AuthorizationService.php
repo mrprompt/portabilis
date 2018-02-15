@@ -3,22 +3,32 @@ declare(strict_types = 1);
 
 namespace App\Service;
 
-use App\Service\PasswordService;
-use App\Entity\User as UserEntity;
+use App\Entity\UserEntity;
 use App\Repository\UserRepository;
+use App\Service\PasswordService;
 
 class AuthorizationService
 {
     /**
      * Repository
+     * 
+     * @var UserRepository
      */
     private $repository;
 
     /**
      * Password Service
+     * 
+     * @var PasswordService
      */
     private $password;
 
+    /**
+     * Constructor
+     * 
+     * @param UserRepository $repository
+     * @param PasswordService $password
+     */
     public function __construct(UserRepository $repository, PasswordService $password)
     {
         $this->repository = $repository;
@@ -27,8 +37,14 @@ class AuthorizationService
 
     /**
      * Create user
+     * 
+     * @param UserEntity $user
+     * 
+     * @throws InvalidArgumentException
+     * 
+     * @return UserEntity
      */
-    public function authorize(UserEntity $user)
+    public function authorize(UserEntity $user): UserEntity
     {
         $search = $this->repository->findOneByEmail($user->getEmail());
 

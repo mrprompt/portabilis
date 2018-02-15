@@ -1,7 +1,7 @@
 <?php
 namespace App\Tests\Mock\Service;
 
-use App\Entity\User;
+use App\Entity\UserEntity;
 use App\Service\AuthorizationService as Service;
 use App\Service\PasswordService;
 use Mockery as m;
@@ -18,8 +18,10 @@ abstract class AuthorizationService
      */
     public static function getMock()
     {
+        $user = new UserEntity;
+        
         $mock = m::mock(Service::class);
-        $mock->shouldReceive('authorize')->andReturn(new User)->byDefault();
+        $mock->shouldReceive('authorize')->andReturn($user)->byDefault();
 
         return $mock;
     }

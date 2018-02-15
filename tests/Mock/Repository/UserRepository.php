@@ -2,7 +2,7 @@
 namespace App\Tests\Mock\Repository;
 
 use App\Repository\UserRepository as Repository;
-use App\Entity\User as UserModel;
+use App\Entity\UserEntity;
 use Mockery as m;
 
 /**
@@ -17,7 +17,7 @@ abstract class UserRepository
      */
     public static function getMock()
     {
-        $userModel = new UserModel();
+        $userModel = new UserEntity();
         $userModel->setPassword('foo');
         
         $user = m::mock(Repository::class);

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace App\Tests\Entity;
 
 use App\Common\ChangeProtectedAttribute;
-use App\Entity\User;
+use App\Entity\UserEntity;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use DateTime;
@@ -14,10 +14,15 @@ use DateTime;
  *
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class UserTest extends TestCase
+class UserEntityTest extends TestCase
 {
     use ChangeProtectedAttribute;
 
+    /**
+     * The user entity
+     * 
+     * @var UserEntity
+     */
     private $user;
 
     /**
@@ -27,7 +32,7 @@ class UserTest extends TestCase
     {
         parent::setUp();
         
-        $this->user = new User;
+        $this->user = new UserEntity;
     }
 
     /**
@@ -67,7 +72,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::getId
+     * @covers       \App\Entity\UserEntity::getId
      */
     public function getIdReturnValue($obj)
     {
@@ -79,7 +84,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::setName
+     * @covers       \App\Entity\UserEntity::setName
      */
     public function setNameReturnEmpty($obj)
     {
@@ -91,7 +96,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::getName
+     * @covers       \App\Entity\UserEntity::getName
      */
     public function getNameReturnValue($obj)
     {
@@ -103,7 +108,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::setEmail
+     * @covers       \App\Entity\UserEntity::setEmail
      */
     public function setEmailReturnEmpty($obj)
     {
@@ -115,7 +120,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::getEmail
+     * @covers       \App\Entity\UserEntity::getEmail
      */
     public function getEmailReturnValue($obj)
     {
@@ -127,7 +132,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::setPassword
+     * @covers       \App\Entity\UserEntity::setPassword
      */
     public function setPasswordReturnEmpty($obj)
     {
@@ -139,7 +144,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::getPassword
+     * @covers       \App\Entity\UserEntity::getPassword
      */
     public function getPasswordReturnValue($obj)
     {
@@ -151,7 +156,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::setDocumentRG
+     * @covers       \App\Entity\UserEntity::setDocumentRG
      */
     public function setDocumentRGReturnEmpty($obj)
     {
@@ -163,7 +168,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::getDocumentRG
+     * @covers       \App\Entity\UserEntity::getDocumentRG
      */
     public function getDocumentRGReturnValue($obj)
     {
@@ -175,7 +180,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::setDocumentCPF
+     * @covers       \App\Entity\UserEntity::setDocumentCPF
      */
     public function setDocumentCPFReturnEmpty($obj)
     {
@@ -187,7 +192,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::getDocumentCPF
+     * @covers       \App\Entity\UserEntity::getDocumentCPF
      */
     public function getDocumentCPFReturnValue($obj)
     {
@@ -199,7 +204,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::setPhoneNumber
+     * @covers       \App\Entity\UserEntity::setPhoneNumber
      */
     public function setPhoneNumberReturnEmpty($obj)
     {
@@ -211,7 +216,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::getPhoneNumber
+     * @covers       \App\Entity\UserEntity::getPhoneNumber
      */
     public function getPhoneNumberReturnValue($obj)
     {
@@ -223,7 +228,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::setBirthday
+     * @covers       \App\Entity\UserEntity::setBirthday
      */
     public function setBirthdayReturnEmpty($obj)
     {
@@ -235,7 +240,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::getBirthday
+     * @covers       \App\Entity\UserEntity::getBirthday
      */
     public function getBirthdayReturnValue($obj)
     {
@@ -247,7 +252,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::setCreatedAt
+     * @covers       \App\Entity\UserEntity::setCreatedAt
      */
     public function setCreatedAtReturnEmpty($obj)
     {
@@ -259,7 +264,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::getCreatedAt
+     * @covers       \App\Entity\UserEntity::getCreatedAt
      */
     public function getCreatedAtReturnValue($obj)
     {
@@ -271,7 +276,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::setUpdatedAt
+     * @covers       \App\Entity\UserEntity::setUpdatedAt
      */
     public function setUpdatedAtReturnEmpty($obj)
     {
@@ -283,7 +288,7 @@ class UserTest extends TestCase
     /**
      * @test
      * @dataProvider validObjects
-     * @covers       \App\Entity\User::getUpdatedAt
+     * @covers       \App\Entity\UserEntity::getUpdatedAt
      */
     public function getUpdatedAtReturnValue($obj)
     {

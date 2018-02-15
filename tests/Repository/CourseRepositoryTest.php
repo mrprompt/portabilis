@@ -1,16 +1,16 @@
 <?php
 namespace App\Tests\Repository;
 
-use App\Entity\UserEntity;
+use App\Entity\CourseEntity;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class UserRepositoryTest extends KernelTestCase
+class CourseRepositoryTest extends KernelTestCase
 {
     /**
-     * @var UserEntity
+     * @var CourseEntity
      */
     protected $obj;
 
@@ -27,7 +27,7 @@ class UserRepositoryTest extends KernelTestCase
         $kernel = self::bootKernel();
 
         $this->em = $kernel->getContainer()->get('doctrine')->getManager();
-        $this->obj = $this->em->getRepository(UserEntity::class);
+        $this->obj = $this->em->getRepository(CourseEntity::class);
     }
 
     /**
@@ -45,7 +45,7 @@ class UserRepositoryTest extends KernelTestCase
 
     /**
      * @test
-     * @covers \App\Repository\UserRepository::findAll
+     * @covers \App\Repository\CourseRepository::findAll
      */
     public function findAll()
     {
@@ -56,23 +56,27 @@ class UserRepositoryTest extends KernelTestCase
 
     /**
      * @test
-     * @covers \App\Repository\UserRepository::findById
+     * @covers \App\Repository\CourseRepository::findById
      */
     public function findById()
     {
+        $this->markTestIncomplete();
+        
         $result = $this->obj->findById(1);
 
         $this->assertTrue(is_array($result));
-        $this->assertInstanceOf(UserEntity::class, $result[0]);
+        $this->assertInstanceOf(CourseEntity::class, $result[0]);
     }
 
     /**
      * @test
-     * @covers \App\Repository\UserRepository::create
+     * @covers \App\Repository\CourseRepository::create
      * @expectedException \Doctrine\DBAL\Exception\NotNullConstraintViolationException
      */
     public function createWithUnpopulatedEntityThrowsException()
     {
-        $result = $this->obj->create(new UserEntity());
+        $this->markTestIncomplete();
+        
+        $this->obj->create(new CourseEntity());
     }
 }

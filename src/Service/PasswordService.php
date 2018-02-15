@@ -1,26 +1,21 @@
 <?php
+declare(strict_types = 1);
+
 namespace App\Service;
 
+/**
+ * Password Service
+ * 
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
 class PasswordService
 {
     /**
-     * @var array
-     */
-    private $config;
-
-    /**
-     * Password constructor.
-     *
-     * @param int $cost
-     */
-    public function __construct(int $cost = 12)
-    {
-        $this->config = ['cost' => $cost];
-    }
-
-    /**
+     * Generate a password
+     * 
      * @param string $password
      * @param int $cost
+     * 
      * @return string
      */
     public function generate(string $password, int $cost): string
@@ -29,8 +24,11 @@ class PasswordService
     }
 
     /**
+     * Verify password hash
+     * 
      * @param string $password
      * @param string $hash
+     * 
      * @return bool
      */
     public function verify(string $password, string $hash): bool

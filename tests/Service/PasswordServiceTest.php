@@ -4,6 +4,11 @@ namespace App\Tests\Service;
 use App\Service\PasswordService;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Password Service Test Case.
+ * 
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
 class PasswordServiceTest extends TestCase
 {
     /**
@@ -11,6 +16,11 @@ class PasswordServiceTest extends TestCase
      */
     const DEFAULT_COST = 12;
     
+    /**
+     * The Password Service
+     * 
+     * @var PasswordService
+     */
     private $service;
 
     /**

@@ -1,7 +1,7 @@
 <?php
 namespace App\Tests\Mock\Entity;
 
-use App\Entity\Course as CourseEntity;
+use App\Entity\CourseEntity;
 use Mockery as m;
 
 /**

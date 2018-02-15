@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Controller;
 
-use App\Entity\User;
+use App\Entity\UserEntity;
 use App\Form\LoginForm;
 use App\Form\SignupForm;
 use App\Service\UserService;
@@ -29,13 +29,13 @@ class SignupController extends Controller
         
         $signupForm = $this->createForm(
             SignupForm::class, 
-            $session->get('signup_data', new User()), 
+            $session->get('signup_data', new UserEntity()), 
             ['action' => $this->generateUrl('signup_post')]
         );
         
         $loginForm = $this->createForm(
             LoginForm::class, 
-            new User(), 
+            new UserEntity(), 
             ['action' => $this->generateUrl('login_post')]
         );
 
@@ -54,7 +54,7 @@ class SignupController extends Controller
     {
         $form = $this->createForm(
             SignupForm::class, 
-            new User(), 
+            new UserEntity(), 
             ['action' => $this->generateUrl('signup_post')]
         );
         

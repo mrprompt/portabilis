@@ -1,7 +1,7 @@
 <?php
 namespace App\Tests\Service;
 
-use App\Entity\User;
+use App\Entity\UserEntity;
 use App\Service\UserService;
 use App\Tests\Mock\Repository\UserRepository as UserRepositoryMock;
 use App\Tests\Mock\Service\PasswordService as PasswordServiceMock;
@@ -48,11 +48,11 @@ class UserServiceTest extends KernelTestCase
      */
     public function createMustBeReturnSameObject()
     {
-        $userModel = new User();
+        $userModel = new UserEntity();
         $userModel->setPassword('foo');
 
         $result = $this->obj->create($userModel);
 
-        $this->assertInstanceOf(User::class, $result);
+        $this->assertInstanceOf(UserEntity::class, $result);
     }
 }

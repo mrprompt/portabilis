@@ -1,7 +1,7 @@
 <?php
 namespace App\Tests\Mock\Entity;
 
-use App\Entity\User as UserEntity;
+use App\Entity\UserEntity;
 use Mockery as m;
 
 /**

@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\CourseRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Course
+class CourseEntity
 {
     use BaseEntity;
 

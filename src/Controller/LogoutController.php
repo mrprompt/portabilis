@@ -9,10 +9,10 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-class SignoutController extends Controller
+class LogoutController extends Controller
 {
     /**
-     * @Route("/logout", name="signout")
+     * @Route("/logout", name="logout")
      * @Method("GET")
      */
     public function indexAction(SessionInterface $session)

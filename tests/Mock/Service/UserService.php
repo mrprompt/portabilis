@@ -1,6 +1,7 @@
 <?php
 namespace App\Tests\Mock\Service;
 
+use App\Entity\UserEntity;
 use App\Service\UserService as Service;
 use App\Service\PasswordService;
 use Mockery as m;
@@ -17,13 +18,13 @@ abstract class UserService
      */
     public static function getMock()
     {
-        $user = m::mock(UserInterface::class);
-        $user->shouldReceive('create')->andReturn(true)->byDefault();
-        $user->shouldReceive('delete')->andReturn(true)->byDefault();
-        $user->shouldReceive('update')->andReturn(true)->byDefault();
-        $user->shouldReceive('findByUserId')->andReturn(true)->byDefault();
-        $user->shouldReceive('listAll')->andReturn(true)->byDefault();
+        $mock = m::mock(UserEntity::class);
+        $mock->shouldReceive('create')->andReturn(true)->byDefault();
+        $mock->shouldReceive('delete')->andReturn(true)->byDefault();
+        $mock->shouldReceive('update')->andReturn(true)->byDefault();
+        $mock->shouldReceive('findByUserId')->andReturn(true)->byDefault();
+        $mock->shouldReceive('listAll')->andReturn(true)->byDefault();
 
-        return $user;
+        return $mock;
     }
 }

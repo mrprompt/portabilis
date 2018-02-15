@@ -16,7 +16,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity(fields={"email", "document_cpf", "document_rg"}, message="This email, cpf or rg is already registered")
  */
-class User
+class UserEntity
 {
     use BaseEntity;
     
