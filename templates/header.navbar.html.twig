@@ -18,7 +18,7 @@
                 {% if app.session.get('user') == false %}
                 <li {{ app.request.get('_route') == 'signup' ? 'class="active"' : '' }}><a href="{{ path('signup') }}">Cadastre-se</a></li>
                 {% else %}
-                <li {{ app.request.get('_route') == 'logout' ? 'class="active"' : '' }}><a href="{{ path('signout') }}">Sair</a></li>
+                <li {{ app.request.get('_route') == 'logout' ? 'class="active"' : '' }}><a href="{{ path('logout') }}">Sair</a></li>
                 {% endif %}
             </ul>
         </div><!--/.navbar-collapse -->

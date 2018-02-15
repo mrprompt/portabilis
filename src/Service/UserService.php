@@ -65,7 +65,7 @@ class UserService
         } catch (NestedValidationException $ex) {
             throw new InvalidArgumentException($ex->getMessage());
         } catch (Exception $ex) {
-            throw $ex;
+            throw new InvalidArgumentException($ex->getMessage());
         }
     }
 }

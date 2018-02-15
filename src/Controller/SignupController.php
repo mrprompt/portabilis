@@ -6,7 +6,6 @@ namespace App\Controller;
 use App\Entity\UserEntity;
 use App\Form\LoginForm;
 use App\Form\SignupForm;
-use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -43,47 +42,5 @@ class SignupController extends Controller
             'signupForm' => $signupForm->createView(),
             'loginForm' => $loginForm->createView(),
         ];
-    }
-
-    /**
-     * @Route("/signup", name="signup_post")
-     * @Method("POST")
-     * @Template("signup/index.html.twig")
-     */
-    public function addAction(Request $request, SessionInterface $session, UserService $userService)
-    {
-        $form = $this->createForm(
-            SignupForm::class, 
-            new UserEntity(), 
-            ['action' => $this->generateUrl('signup_post')]
-        );
-        
-        $form->handleRequest($request);
-        
-        $data = $form->getData();
-
-        $session->set('signup_data', $data);
-        
-        if ($form->isValid()) {
-            try {
-                $userService->create($data);
-
-                $this->addFlash('info', 'Registered');
-                
-                $session->remove('signup_data');
-            } catch (\InvalidArgumentException $ex) {
-                $this->addFlash('danger', 'Error, this CPF is not valid :(');
-            } catch (\Exception $ex) {
-                $this->addFlash('danger', $ex->getMessage());
-            }
-        } else {
-            if (isset($errors)) {
-                foreach ($errors as $error) {
-                    $this->addFlash('danger', $error->getMessage());
-                }
-            }
-        }
-
-        return $this->redirect($this->generateUrl('signup'));
     }
 }

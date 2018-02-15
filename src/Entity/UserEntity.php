@@ -11,10 +11,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * User Entity
  *
- * @ORM\Table(name="users", uniqueConstraints={@ORM\UniqueConstraint(name="email_idx", columns={"email"})})
+ * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
- * @UniqueEntity(fields={"email", "document_cpf", "document_rg"}, message="This email, cpf or rg is already registered")
+ * @UniqueEntity(
+ *      fields={"email", "document_cpf", "document_rg"},
+ *      message="An user with this documents is already registered"
+ * )
  */
 class UserEntity
 {

@@ -3,6 +3,7 @@ namespace App\Repository;
 
 use App\Entity\UserEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class UserRepository extends ServiceEntityRepository
@@ -22,9 +23,13 @@ class UserRepository extends ServiceEntityRepository
      */
     public function create(UserEntity $user)
     {
-        $this->em->persist($user);
-        $this->em->flush();
+        try {
+            $this->em->persist($user);
+            $this->em->flush();
 
-        return $user;
+            return $user;
+        } catch (UniqueConstraintViolationException $ex) {
+            throw new \InvalidArgumentException("An user with this email or documents is already registered");
+        }
     }
 }
