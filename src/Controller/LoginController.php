@@ -39,6 +39,8 @@ class LoginController extends Controller
                 $session->set('user', $authorized);
                 
                 $this->addFlash('info', 'User logged');
+                
+                return $this->redirect($this->generateUrl('homepage'));
             } catch (\InvalidArgumentException $ex) {
                 $this->addFlash('danger', 'Not authorized');
             }
@@ -50,6 +52,6 @@ class LoginController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('homepage'));
+        return $this->redirect($this->generateUrl('signup'));
     }
 }

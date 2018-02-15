@@ -19,6 +19,6 @@ class SignoutController extends Controller
     {
         $session->clear();
 
-        return $this->redirect($this->generateUrl('homepage')); 
+        return $this->redirect($this->generateUrl('signup')); 
     }
 }
