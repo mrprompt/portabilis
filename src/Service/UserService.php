@@ -9,15 +9,24 @@ use App\Service\PasswordService;
 use Respect\Validation\Validator as v;
 use Respect\Validation\Exceptions\NestedValidationException;
 
+/**
+ * User Service Class
+ * 
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
 class UserService 
 {
     /**
      * Repository
+     * 
+     * @var UserRepository
      */
     private $repository;
 
     /**
      * Password Service
+     * 
+     * @var PasswordService
      */
     private $password;
 
