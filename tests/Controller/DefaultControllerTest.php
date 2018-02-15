@@ -1,18 +1,23 @@
 <?php
-
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\Controller\BaseController;
 
-class DefaultControllerTest extends WebTestCase
+/**
+ * Default Controller Test Case
+ * 
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
+class DefaultControllerTest extends BaseController
 {
+    /**
+     * @test
+     */
     public function testIndex()
     {
-        $client = static::createClient();
+        $crawler = $this->client->request('GET', '/');
 
-        $crawler = $client->request('GET', '/');
-
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        // $this->assertContains('Hello, world!', $crawler->filter('.jumbotron .container h1')->text());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('Hello!', $crawler->filter('h1')->text());
     }
 }

@@ -1,10 +1,14 @@
 <?php
-
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\Controller\BaseController;
 
-class SignoutControllerTest extends WebTestCase
+/**
+ * Logout Controller Test Case
+ * 
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
+class LogoutControllerTest extends BaseController
 {
     /**
      * @test
