@@ -12,6 +12,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li {{ app.request.get('_route') == 'homepage' ? 'class="active"' : '' }}><a href="{{ path('homepage') }}">Início</a></li>
+                <li {{ app.request.get('_route') == 'courses' ? 'class="active"' : '' }}><a href="{{ path('courses') }}">Cursos</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if app.session.get('user') == false %}
