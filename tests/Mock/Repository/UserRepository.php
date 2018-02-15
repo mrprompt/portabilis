@@ -18,10 +18,11 @@ abstract class UserRepository
     public static function getMock()
     {
         $userModel = new UserModel();
+        $userModel->setPassword('foo');
         
         $user = m::mock(Repository::class);
         $user->shouldReceive('create')->andReturn($userModel)->byDefault();
-        $user->shouldReceive('findById')->andReturn($userModel)->byDefault();
+        $user->shouldReceive('findOneByEmail')->andReturn($userModel)->byDefault();
         $user->shouldReceive('findAll')->andReturn([$userModel])->byDefault();
 
         return $user;
