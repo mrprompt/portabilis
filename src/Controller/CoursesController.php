@@ -11,6 +11,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
+/**
+ * Courses Controller
+ * 
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
 class CoursesController extends Controller
 {
     /**
@@ -18,7 +23,7 @@ class CoursesController extends Controller
      * @Method("GET")
      * @Template("courses/index.html.twig")
      */
-    public function indexAction(SessionInterface $session, CourseService $courseService)
+    public function indexAction(SessionInterface $session, CourseService $courseService): array
     {
         return ['courses' => $courseService->findAll()];
     }

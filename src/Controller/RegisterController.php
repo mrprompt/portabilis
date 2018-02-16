@@ -14,6 +14,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
+/**
+ * Register Controller
+ * 
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
 class RegisterController extends Controller
 {
     /**

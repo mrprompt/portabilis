@@ -13,6 +13,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
+/**
+ * Signup Controller
+ * 
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
 class SignupController extends Controller
 {
     /**

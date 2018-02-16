@@ -13,6 +13,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * Login Controller
+ * 
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
 class LoginController extends Controller
 {
     /**

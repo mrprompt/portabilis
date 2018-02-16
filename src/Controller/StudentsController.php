@@ -11,6 +11,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
+/**
+ * Students Controller
+ * 
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
 class StudentsController extends Controller
 {
     /**

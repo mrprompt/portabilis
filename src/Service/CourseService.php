@@ -7,8 +7,6 @@ use InvalidArgumentException;
 use Exception;
 use App\Entity\CourseEntity;
 use App\Repository\CourseRepository;
-use Respect\Validation\Validator as v;
-use Respect\Validation\Exceptions\NestedValidationException;
 
 /**
  * Course Service Class
@@ -42,14 +40,11 @@ class CourseService
      * @return CourseEntity 
      * 
      * @throws InvalidArgumentException
-     * @throws Exception
      */
     public function create(CourseEntity $course): CourseEntity
     {
         try {
             return $this->repository->create($course);
-        } catch (NestedValidationException $ex) {
-            throw new InvalidArgumentException($ex->getMessage());
         } catch (Exception $ex) {
             throw new InvalidArgumentException($ex->getMessage());
         }

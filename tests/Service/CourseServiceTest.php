@@ -1,21 +1,20 @@
 <?php
 namespace App\Tests\Service;
 
-use App\Entity\UserEntity;
-use App\Service\UserService;
-use App\Tests\Mock\Repository\UserRepository as UserRepositoryMock;
-use App\Tests\Mock\Service\PasswordService as PasswordServiceMock;
+use App\Entity\CourseEntity;
+use App\Service\CourseService;
+use App\Tests\Mock\Repository\CourseRepository as CourseRepositoryMock;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
- * UserService test case.
+ * CourseService test case.
  *
  * @author Thiago Paes <mrprompt@gmail.com>
  */
 class CourseServiceTest extends KernelTestCase
 {
     /**
-     * @var UserService
+     * @var CourseService
      */
     private $obj;
 
@@ -26,9 +25,8 @@ class CourseServiceTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $this->obj = new UserService(
-            UserRepositoryMock::getMock(),
-            PasswordServiceMock::getMock()
+        $this->obj = new CourseService(
+            CourseRepositoryMock::getMock()
         );
     }
 
@@ -44,15 +42,25 @@ class CourseServiceTest extends KernelTestCase
 
     /**
      * @test
-     * @covers \App\Service\UserService::save()
+     * @covers \App\Service\CourseService::create()
      */
     public function createMustBeReturnSameObject()
     {
-        $userModel = new UserEntity();
-        $userModel->setPassword('foo');
+        $courseModel = new CourseEntity();
 
-        $result = $this->obj->create($userModel);
+        $result = $this->obj->create($courseModel);
 
-        $this->assertInstanceOf(UserEntity::class, $result);
+        $this->assertInstanceOf(CourseEntity::class, $result);
+    }
+
+    /**
+     * @test
+     * @covers \App\Service\CourseService::findAll()
+     */
+    public function findAllMustBeReturnArray()
+    {
+        $result = $this->obj->findAll();
+
+        $this->assertTrue(is_array($result));
     }
 }
