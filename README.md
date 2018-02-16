@@ -2,6 +2,8 @@
 
 Projeto Teste com Symfony 4.
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Install
 
 1 - Install dependencies

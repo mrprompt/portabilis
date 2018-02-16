@@ -1,0 +1,23 @@
+{
+  "name": "Portabilis",
+  "description": "Projeto Portabilis",
+  "repository": "https://github.com/mrprompt/portabilis",
+  "keywords": ["teste", "sf4", "portabilis", "symfony", "crud"],
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "9.5"
+      }
+    }
+  ],
+  "scripts": {
+    "postdeploy": "./bin/console doctrine:schema:create"
+  },
+  "env": {
+    "ENV": {
+      "description": "Application environment",
+      "value": "production"
+    }
+  }
+}
