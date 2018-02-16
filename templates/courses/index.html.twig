@@ -4,4 +4,30 @@
 
 {% block body %}
     <h1>Cursos</h1>
+
+    <div class="row">
+        {% for course in courses %}
+        <div class="col-lg-4" style="min-height: 25em; vertical-align: top">
+            <div class="thumbnail">
+                <h2>{{ course.getName() }}</h2>
+
+                <dl>
+                    <dt>Mensalidade</dt>
+                    <dd>R$ {{ course.getMonthlyPayment() }}</dd>
+                    
+                    <dt>Matrícula</dt>
+                    <dd>R$ {{ course.getRegistrationFee() }}</dd>
+                    
+                    <dt>Período</dt>
+                    <dd>{{ course.getPeriod() }}</dd>
+                    
+                    <dt>Duração (meses)</dt>
+                    <dd>{{ course.getDuration() }}</dd>
+                </dl>
+
+                <a href="#" class="btn btn-primary">Inscrever-se</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}

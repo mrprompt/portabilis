@@ -54,4 +54,14 @@ class CourseService
             throw new InvalidArgumentException($ex->getMessage());
         }
     }
+
+    /**
+     * List all courses
+     * 
+     * @return array
+     */
+    public function findAll(): array
+    {
+        return $this->repository->findAll();
+    }
 }

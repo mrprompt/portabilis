@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Controller;
 
-use App\Service\CourseService;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -11,15 +11,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-class CoursesController extends Controller
+class StudentsController extends Controller
 {
     /**
-     * @Route("/courses", name="courses")
+     * @Route("/students", name="students")
      * @Method("GET")
-     * @Template("courses/index.html.twig")
+     * @Template("students/index.html.twig")
      */
-    public function indexAction(SessionInterface $session, CourseService $courseService)
+    public function indexAction(SessionInterface $session, UserService $userService)
     {
-        return ['courses' => $courseService->findAll()];
+        return ['students' => $userService->findAll()];
     }
 }

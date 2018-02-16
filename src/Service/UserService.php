@@ -88,4 +88,14 @@ class UserService
             throw new InvalidArgumentException($ex->getMessage());
         }
     }
+
+    /**
+     * List all users
+     * 
+     * @return array
+     */
+    public function findAll(): array
+    {
+        return $this->repository->findAll();
+    }
 }

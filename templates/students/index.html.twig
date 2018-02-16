@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Estudantes{% endblock %}
+
+{% block body %}
+    <h1>Estudantes</h1>
+
+    <div class="row">
+        {% for student in students %}
+        <div class="col-lg-4">
+            <div class="thumbnail">
+                <h2>{{ student.getName() }}</h2>
+
+                <img src="https://www.gravatar.com/avatar/{{ student.getEmail() | trim }}?s=120">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
