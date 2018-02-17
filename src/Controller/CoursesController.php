@@ -23,8 +23,10 @@ class CoursesController extends Controller
      * @Method("GET")
      * @Template("courses/index.html.twig")
      */
-    public function indexAction(SessionInterface $session, CourseService $courseService): array
+    public function indexAction(Request $request, SessionInterface $session, CourseService $courseService): array
     {
-        return ['courses' => $courseService->findAll()];
+        $courses = $courseService->findAll((int) $request->get('page'));
+        
+        return ['courses' => $courses];
     }
 }
