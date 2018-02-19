@@ -23,9 +23,13 @@ class StudentsController extends Controller
      * @Method("GET")
      * @Template("students/index.html.twig")
      */
-    public function indexAction(SessionInterface $session, UserService $userService)
+    public function indexAction(
+        SessionInterface $session, 
+        UserService $userService,
+        Request $request
+    ): array 
     {
-        $students = $userService->findAll();
+        $students = $userService->findAll((int) $request->get('page', 1));
 
         return ['students' => $students];
     }

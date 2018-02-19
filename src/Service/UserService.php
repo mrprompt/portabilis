@@ -94,8 +94,8 @@ class UserService
      * 
      * @return array
      */
-    public function findAll(): object
+    public function findAll(int $page = 1): object
     {
-        return $this->repository->listAll();
+        return $this->repository->listAll($page);
     }
 }
