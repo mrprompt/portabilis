@@ -83,7 +83,7 @@ class CourseRepositoryTest extends KernelTestCase
             [
                 $course1
             ]
-            ];
+        ];
     }
 
     /**

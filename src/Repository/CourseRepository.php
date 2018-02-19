@@ -2,14 +2,16 @@
 namespace App\Repository;
 
 use App\Entity\CourseEntity;
+use App\Repository\BaseRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\ORM\Query;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class CourseRepository extends ServiceEntityRepository
 {
+    use BaseRepository;
+    
     const NUM_ITEMS = 30;
     
     /**
@@ -24,29 +26,32 @@ class CourseRepository extends ServiceEntityRepository
         $this->em = $this->getEntityManager();
     }
 
-    private function createPaginator(Query $query, int $page): Pagerfanta
-    {
-        $paginator = new Pagerfanta(new DoctrineORMAdapter($query));
-        $paginator->setMaxPerPage(self::NUM_ITEMS);
-        $paginator->setCurrentPage($page);
-        
-        return $paginator;
-    }
-    
     /**
      * Create course
+     * 
+     * @param CourseEntity $course
+     * 
+     * @return CourseEntity
      */
-    public function create(CourseEntity $user)
+    public function create(CourseEntity $course): CourseEntity
     {
-        $this->em->persist($user);
+        $this->em->persist($course);
         $this->em->flush();
 
-        return $user;
+        return $course;
     }
 
+    /**
+     * List all courses
+     * 
+     * @param int $page
+     * 
+     * @return PagerFanta
+     */
     public function listAll(int $page = 1): Pagerfanta
     {
-        $query = $this->getEntityManager()
+        $query = $this
+            ->em
             ->createQuery('
                 SELECT c
                 FROM App\Entity\CourseEntity c

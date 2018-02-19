@@ -2,12 +2,19 @@
 namespace App\Repository;
 
 use App\Entity\UserEntity;
+use App\Repository\BaseRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\ORM\Query;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class UserRepository extends ServiceEntityRepository
 {
+    use BaseRepository;
+    
+    const NUM_ITEMS = 30;
+    
     /**
      * Constructor
      */
@@ -51,5 +58,25 @@ class UserRepository extends ServiceEntityRepository
         $this->em->flush();
 
         return $search;
+    }
+
+    /**
+     * List all users
+     * 
+     * @param int $page
+     * 
+     * @return PagerFanta
+     */
+    public function listAll(int $page = 1): Pagerfanta
+    {
+        $query = $this
+            ->em
+            ->createQuery('
+                SELECT u
+                FROM App\Entity\UserEntity u
+                ORDER BY u.name ASC
+            ');
+
+        return $this->createPaginator($query, $page);
     }
 }
