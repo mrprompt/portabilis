@@ -17,8 +17,18 @@ use League\Csv\Statement;
  */
 class ImportCoursesCommand extends Command
 {
+    /**
+     * Course Service
+     * 
+     * @var CourseService
+     */
     private $courseService;
 
+    /**
+     * Constructor
+     * 
+     * @param CourseService $courseService
+     */
     public function __construct(CourseService $courseService)
     {
         $this->courseService = $courseService;
@@ -26,7 +36,12 @@ class ImportCoursesCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    /**
+     * Configure command and make help
+     * 
+     * @return void
+     */
+    protected function configure(): void
     {
         $this
             ->setName('app:import:courses')
@@ -38,7 +53,15 @@ class ImportCoursesCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    /**
+     * Read input file and create new courses
+     * 
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * 
+     * @return void
+     */
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         // outputs multiple lines to the console (adding "\n" at the end of each line)
         $output->writeln([

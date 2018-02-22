@@ -57,10 +57,10 @@ class CourseServiceTest extends KernelTestCase
      * @test
      * @covers \App\Service\CourseService::findAll()
      */
-    public function findAllMustBeReturnArray()
+    public function findAllMustBeReturnObject()
     {
         $result = $this->obj->findAll();
 
-        $this->assertTrue(is_array($result));
+        $this->assertTrue(is_object($result));
     }
 }

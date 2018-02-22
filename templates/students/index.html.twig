@@ -6,14 +6,20 @@
     <h1>Estudantes</h1>
 
     <div class="row">
-        {% for student in students %}
-        <div class="col-lg-4">
-            <div class="thumbnail">
+        {% for student in students.currentPageResults %}
+        <div class="col-lg-4" style="min-height: 15em; vertical-align: top">
+            <div class="">
                 <h2>{{ student.getName() }}</h2>
 
                 <img src="https://www.gravatar.com/avatar/{{ student.getEmail() | trim }}?s=120">
             </div>
         </div>
         {% endfor %}
+
+        <hr class="clearfix">
+        
+        <div class="text-center">
+            {{ pagerfanta(students, 'twitter_bootstrap3', { 'proximity': 2}) }}
+        </div>
     </div>
 {% endblock %}

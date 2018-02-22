@@ -6,7 +6,7 @@
     <h1>Cursos</h1>
 
     <div class="row">
-        {% for course in courses %}
+        {% for course in courses.currentPageResults %}
         <div class="col-lg-4" style="min-height: 25em; vertical-align: top">
             <div class="thumbnail">
                 <h2>{{ course.getName() }}</h2>
@@ -25,9 +25,15 @@
                     <dd>{{ course.getDuration() }}</dd>
                 </dl>
 
-                <a href="#" class="btn btn-primary">Inscrever-se</a>
+                <a href="{{ path('course_details', { 'id': course.getId() }) }}" class="btn btn-primary">Inscrever-se</a>
             </div>
         </div>
         {% endfor %}
+        
+        <hr class="clearfix">
+        
+        <div class="text-center">
+            {{ pagerfanta(courses, 'twitter_bootstrap3', { 'proximity': 2}) }}
+        </div>
     </div>
 {% endblock %}

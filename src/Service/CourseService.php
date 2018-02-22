@@ -55,8 +55,20 @@ class CourseService
      * 
      * @return array
      */
-    public function findAll(): array
+    public function findAll(int $page = 1): object
     {
-        return $this->repository->findAll();
+        return $this->repository->listAll($page);
+    }
+
+    /**
+     * Find course
+     * 
+     * @param int $id
+     * 
+     * @return CourseEntity
+     */
+    public function find(int $id): ?CourseEntity
+    {
+        return $this->repository->find($id);
     }
 }

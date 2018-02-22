@@ -23,8 +23,53 @@ class CoursesController extends Controller
      * @Method("GET")
      * @Template("courses/index.html.twig")
      */
-    public function indexAction(SessionInterface $session, CourseService $courseService): array
+    public function indexAction(
+        Request $request, 
+        SessionInterface $session, 
+        CourseService $courseService
+    ): array
     {
-        return ['courses' => $courseService->findAll()];
+        $courses = $courseService->findAll((int) $request->get('page', 1));
+        
+        return ['courses' => $courses];
+    }
+
+    /**
+     * @Route("/course/{id}", name="course_details")
+     * @Method("GET")
+     * @Template("courses/view.html.twig")
+     */
+    public function viewAction(
+        Request $request, 
+        SessionInterface $session, 
+        CourseService $courseService
+    ): array
+    {
+        $course = $courseService->find((int) $request->get('id'));
+
+        if (!$course) {
+            throw $this->createNotFoundException('The product does not exist');
+        }
+        
+        return ['course' => $course];
+    }
+
+    /**
+     * @Route("/course/{id}", name="course_subscribe")
+     * @Method("POST")
+     */
+    public function subscribeAction(
+        Request $request, 
+        SessionInterface $session, 
+        CourseService $courseService
+    ): array
+    {
+        $course = $courseService->find((int) $request->get('id'));
+
+        if (!$course) {
+            throw $this->createNotFoundException('The product does not exist');
+        }
+        
+        return ['course' => $course];
     }
 }
