@@ -25,7 +25,7 @@
                     <dd>{{ course.getDuration() }}</dd>
                 </dl>
 
-                <a href="#" class="btn btn-primary">Inscrever-se</a>
+                <a href="{{ path('course_details', { 'id': course.getId() }) }}" class="btn btn-primary">Inscrever-se</a>
             </div>
         </div>
         {% endfor %}

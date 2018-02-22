@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ course.getName() }} - Cursos{% endblock %}
+
+{% block body %}
+    <h1>{{ course.getName () }}</h1>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <dl>
+                <dt>Mensalidade</dt>
+                <dd>R$ {{ course.getMonthlyPayment() }}</dd>
+                
+                <dt>Matrícula</dt>
+                <dd>R$ {{ course.getRegistrationFee() }}</dd>
+                
+                <dt>Período</dt>
+                <dd>{{ course.getPeriod() }}</dd>
+                
+                <dt>Duração (meses)</dt>
+                <dd>{{ course.getDuration() }}</dd>
+            </dl>
+        </div>
+        <div class="col-lg-6">
+            <form method="post" action="{{ path('course_subscribe', { 'id': course.getId() }) }}">
+                <a href="{{ path('courses') }}" class="btn btn-link">Voltar</a>
+                
+                <button type="submit" class="btn btn-primary">Inscrever-se</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -59,4 +59,16 @@ class CourseService
     {
         return $this->repository->listAll($page);
     }
+
+    /**
+     * Find course
+     * 
+     * @param int $id
+     * 
+     * @return CourseEntity
+     */
+    public function find(int $id): ?CourseEntity
+    {
+        return $this->repository->find($id);
+    }
 }

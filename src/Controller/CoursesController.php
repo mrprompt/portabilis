@@ -33,4 +33,43 @@ class CoursesController extends Controller
         
         return ['courses' => $courses];
     }
+
+    /**
+     * @Route("/course/{id}", name="course_details")
+     * @Method("GET")
+     * @Template("courses/view.html.twig")
+     */
+    public function viewAction(
+        Request $request, 
+        SessionInterface $session, 
+        CourseService $courseService
+    ): array
+    {
+        $course = $courseService->find((int) $request->get('id'));
+
+        if (!$course) {
+            throw $this->createNotFoundException('The product does not exist');
+        }
+        
+        return ['course' => $course];
+    }
+
+    /**
+     * @Route("/course/{id}", name="course_subscribe")
+     * @Method("POST")
+     */
+    public function subscribeAction(
+        Request $request, 
+        SessionInterface $session, 
+        CourseService $courseService
+    ): array
+    {
+        $course = $courseService->find((int) $request->get('id'));
+
+        if (!$course) {
+            throw $this->createNotFoundException('The product does not exist');
+        }
+        
+        return ['course' => $course];
+    }
 }
