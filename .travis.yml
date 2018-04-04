@@ -1,0 +1,16 @@
+language: php
+
+php:
+  - 7.2
+
+before_script:
+  - composer selfupdate
+  - composer install --dev --prefer-dist
+  - DATABASE_URL="sqlite:///%kernel.project_dir%/var/test.db" ./bin/console doctrine:schema:create
+  # - composer require codeclimate/php-test-reporter
+
+script:
+  - ./bin/phpunit --coverage-clover build/logs/clover.xml
+
+# after_success:
+#  - ./vendor/bin/test-reporter --coverage-report build/logs/clover.xml
