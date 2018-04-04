@@ -1,5 +1,7 @@
 # Portabilis
 
+[![Build Status](https://travis-ci.org/mrprompt/exemplo-portabilis.svg?branch=master)](https://travis-ci.org/mrprompt/exemplo-portabilis)
+
 Projeto Teste com Symfony 4.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mrprompt/portabilis/tree/master)
